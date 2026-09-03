@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alexa Kaminski – Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Research papers by Alexa Kaminski." />
+
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #1f2933;
+      --border: #e5e7eb;
+      --link: #1d4ed8;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover,
+    a:focus-visible { text-decoration: underline; }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header.site-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .site-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+
+    .site-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    nav.site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    nav.site-nav a {
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav.site-nav a.active {
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+
+    main { margin-top: 24px; }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 6px;
+    }
+
+    .page-intro {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin: 0 0 24px;
+      max-width: 75ch;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin: 28px 0 10px;
+    }
+
+    .papers {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .paper-card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .paper-top {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .paper-meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .paper-title {
+      font-size: 1.1rem;
+      font-weight: 650;
+      margin: 0 0 6px;
+      line-height: 1.35;
+    }
+
+    .paper-authors {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .paper-summary {
+      font-size: 0.95rem;
+      margin: 0 0 10px;
+      max-width: 85ch;
+    }
+
+    .paper-figure-wrapper {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .paper-figure {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      display: block;
+      margin: 0 auto 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding-top: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 720px) {
+      .paper-top { grid-template-columns: 1fr; }
+    }
+
+    /* Request buttons */
+    .paper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--fg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 650;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-decoration: none; /* so <a class="btn"> would look like a button if you ever use it */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover { filter: brightness(0.98); }
+    .btn:focus-visible { outline: 3px solid rgba(29, 78, 216, 0.25); outline-offset: 2px; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .btn-ghost {
+      background: #eef2f7;
+      border-color: transparent;
+    }
+
+    /* Modal */
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.5);
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding: 16px;
+    }
+
+    .modal-card{
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      width: min(520px, 100%);
+      border: 1px solid var(--border);
+    }
+
+    .modal-card label{
+      display:block;
+      margin:10px 0;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .modal-card input,
+    .modal-card textarea{
+      width:100%;
+      padding:8px;
+      margin-top:6px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      font: inherit;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div>
+        <div class="site-title">Alexa Kaminski</div>
+        <div class="site-subtitle">University of Zurich</div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="research.html" class="active" aria-current="page">Research</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Research</h1>
+      <p class="page-intro">
+        Below is a selection of my current research. Please click on any of the buttons to request drafts.
+      </p>
+
+      <div class="section-label">Work in progress</div>
+
+      <section class="papers" aria-label="Working papers and works in progress">
+
+        <!-- PAPER 3 (NOW FIRST) -->
+        <article class="paper-card">
+          <div class="paper-top">
+            <div>
+              <div class="paper-meta">Work in progress</div>
+              <h2 class="paper-title">Inequality Without Differences: A Network Theory of Global Income Dispersion</h2>
+
+              <p class="paper-authors">Alexa Kaminski</p>
+
+              <p class="paper-summary">
+                I build a microfounded production network formation model where firms endogenously form and drop supplier links while investing in productivity.
+                The economy converges to a unique stationary distribution for firm productivity, network degrees, and size.
+                In a multi-country extension, the cross-country GDP distribution has a well-defined limit as the number of countries grows.
+                When calibrated, the model produces persistent income dispersion even without cross-country fundamental differences,
+                and it matches observed degree and productivity distributions.
+              </p>
+
+                <div class="paper-actions">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    data-request="PDF"
+                    data-paper="Inequality Without Differences: A Network Theory of Global Income Dispersion"
+                  >
+                    PDF
+                  </button>
+                
+              
+                
+                </div>
+
+              <p class="paper-meta" style="margin: 8px 0 0;">
+                New draft coming soon!
+              </p>
+            </div>
+
+            <figure class="paper-figure-wrapper">
+              <img
+                src="img/multi_network.png"
+                alt="Multi-country simulation"
+                class="paper-figure"
+                loading="lazy"
+              />
+              <figcaption>
+                Main result: Network formation leads to clusters of economic activity and income differences across countries.
+              </figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <!-- PAPER 1 -->
+        <article class="paper-card">
+          <div class="paper-top">
+            <div>
+              <div class="paper-meta">Work in progress</div>
+              <h2 class="paper-title">Central Bank Narratives and the Transmission of Monetary Policy</h2>
+
+              <p class="paper-authors">
+                Alexa Kaminski, Alistair Macaulay, Wenting Song
+              </p>
+
+              <p class="paper-summary">
+                This paper studies how the transmission of monetary policy varies with policymaker narratives. Using an AI-based data classification algorithm,
+                we construct directed graphs of the causal mechanisms described in FOMC transcripts, which capture the narratives used to justify interest rate decisions.
+                We find substantial variation in narratives over time, which has consequences for the power of monetary policy transmission.
+              </p>
+
+              <div class="paper-actions">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  data-request="PDF"
+                  data-paper="Central Bank Narratives and the Transmission of Monetary Policy"
+                >
+                  PDF
+                </button>
+              </div>
+            </div>
+
+            <figure class="paper-figure-wrapper">
+              <img
+                src="img/romerromer04.png"
+                alt="Paper 1 figure"
+                class="paper-figure"
+                loading="lazy"
+              />
+              <figcaption>
+                Main result: Central bank narratives vary with monetary policy shocks (here: Romer&amp;Romer 2004).
+              </figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <!-- PAPER 2 -->
+        <article class="paper-card">
+          <div class="paper-top">
+            <div>
+              <div class="paper-meta">Work in progress</div>
+              <h2 class="paper-title">Using Media to Estimate Climate Preferences Over Time</h2>
+        
+              <p class="paper-authors">
+                Alexa Kaminski, Alistair Macaulay
+              </p>
+        
+              <p class="paper-summary">
+                Public sentiment is difficult to measure: surveys often suffer response issues and bias, measuring sentiment in media data is prone to bias because it often neglects the extensive margin
+                (e.g., more articles are published in crises, biasing the sentiment downward). This paper argues that we can resolve both issues by explicitly using the information revealed by the extensive
+                margin of newspaper data. We apply this methodology to measure public sentiment towards climate change and the green transition.
+              </p>
+            </div>
+        
+            <figure class="paper-figure-wrapper">
+              <img
+                src="img/picture_climate_paper.png"
+                alt="Paper 2 figure"
+                class="paper-figure"
+                loading="lazy"
+              />
+              <figcaption>
+                Main result: The number of articles on climate change varies widely over time – variation that contains useful information for measuring sentiment.
+              </figcaption>
+            </figure>
+          </div>
+        </article>
+
+      </section>
+    </main>
+
+    <footer>
+      <div>&copy; <span id="year"></span> Alexa Kaminski</div>
+      <div>
+        <a href="mailto:alexa.kaminski@econ.uzh.ch">Email</a>
+        ·
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Request Access Modal -->
+  <div id="requestModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="requestTitle">
+      <h3 id="requestTitle" style="margin:0 0 10px;">Request access</h3>
+      <p id="requestContext" style="margin:0 0 14px; color: var(--muted); font-size: 0.95rem;"></p>
+
+      <form id="requestForm" action="https://formspree.io/f/manrpvln" method="POST">
+        <label>
+          Email
+          <input name="email" type="email" required>
+        </label>
+
+        <input type="hidden" name="paper_title" id="paperTitleField" value="">
+        <input type="hidden" name="requested_item" id="requestedItemField" value="">
+        <input type="hidden" name="_subject" id="subjectField" value="Research access request">
+        <input type="text" name="_gotcha" style="display:none">
+
+        <div class="row">
+          <button type="submit" class="btn btn-primary">Send request</button>
+          <button type="button" id="closeRequest" class="btn btn-ghost">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Modal logic
+    const modal = document.getElementById("requestModal");
+    const requestContext = document.getElementById("requestContext");
+    const paperTitleField = document.getElementById("paperTitleField");
+    const requestedItemField = document.getElementById("requestedItemField");
+    const subjectField = document.getElementById("subjectField");
+    const closeBtn = document.getElementById("closeRequest");
+
+    function openModal({ paper, item }) {
+      paperTitleField.value = paper || "";
+      requestedItemField.value = item || "";
+      subjectField.value = `Access request: ${item} — ${paper}`;
+      requestContext.textContent = `Requesting: ${item} for "${paper}".`;
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-request]");
+      if (!btn) return;
+
+      openModal({
+        paper: btn.getAttribute("data-paper"),
+        item: btn.getAttribute("data-request")
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.style.display === "flex") closeModal();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alexa Kaminski – Privacy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Privacy notice for alexa-kaminski.github.io." />
+
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #1f2933;
+      --border: #e5e7eb;
+      --link: #1d4ed8;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover,
+    a:focus-visible { text-decoration: underline; }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header.site-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .site-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+
+    .site-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    nav.site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    nav.site-nav a {
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav.site-nav a.active {
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+
+    main { margin-top: 24px; }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 10px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+    }
+
+    .muted {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    ul { padding-left: 18px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding-top: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div>
+        <div class="site-title">Alexa Kaminski</div>
+        <div class="site-subtitle">University of Zurich</div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html" class="active" aria-current="page">Privacy</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Privacy</h1>
+      <p class="muted">Last updated: <span id="lastUpdated"></span></p>
+
+      <div class="card">
+        <p>
+          This site is a static personal website hosted on GitHub Pages.
+          I do not use third-party analytics on this site.
+        </p>
+
+        <h2 style="font-size:1.1rem; margin:16px 0 6px;">Data you provide</h2>
+        <p>
+          If you request access to a draft (e.g., via the “Request access” buttons), your message is submitted through Formspree.
+          I receive the information you provide (such as email address) in order to respond.
+        </p>
+
+        <h2 style="font-size:1.1rem; margin:16px 0 6px;">How I use and store it</h2>
+        <ul>
+          <li>I use your information only to respond to your request and share drafts where appropriate.</li>
+          <li>I keep messages as long as needed for correspondence and record-keeping, and delete them upon request when feasible.</li>
+        </ul>
+
+        <h2 style="font-size:1.1rem; margin:16px 0 6px;">Third-party services</h2>
+        <ul>
+          <li><strong>GitHub Pages</strong> hosts this website.</li>
+          <li><strong>Formspree</strong> processes form submissions and forwards them to me.</li>
+        </ul>
+
+        <h2 style="font-size:1.1rem; margin:16px 0 6px;">Contact</h2>
+        <p>
+          If you have questions or would like your message deleted, please email
+          <a href="mailto:alexa.kaminski@econ.uzh.ch">alexa.kaminski@econ.uzh.ch</a>.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <div>&copy; <span id="year"></span> Alexa Kaminski</div>
+      <div>
+        <a href="index.html">Home</a>
+        ·
+        <a href="contact.html">Contact</a>
+        ·
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("lastUpdated").textContent = new Date().toISOString().slice(0, 10);
+  </script>
+</body>
+</html>
